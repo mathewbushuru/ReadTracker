@@ -8,6 +8,9 @@ function Book(title, author, numPages, alreadyRead = false, id) {
   this.alreadyRead = alreadyRead;
   this.id = id;
 }
+Book.prototype.readBook = function () {
+  this.alreadyRead = true;
+};
 
 const frankenstein = new Book(
   (title = "Frankenstein"),
@@ -89,7 +92,6 @@ function renderCurrentBooks() {
 
   for (let book of myLibrary) {
     const newBookCardDiv = document.createElement("div");
-    newBookCardDiv.setAttribute("dataId", book.id);
     newBookCardDiv.className = "newBookCard";
     newBookCardDiv.innerHTML = `<p>Title: ${book.title}</p>`;
     newBookCardDiv.innerHTML += `<p>Author: ${book.author}</p>`;
@@ -97,7 +99,10 @@ function renderCurrentBooks() {
     newBookCardDiv.innerHTML += `<p> ${
       book.alreadyRead ? "Completed!" : "Not Read!"
     }</p>`;
-    newBookCardDiv.innerHTML += `<button dataId="${book.id}" class="deleteBook">Delete</button>`;
+    if (!book.alreadyRead) {
+      newBookCardDiv.innerHTML += `<button dataId="${book.id}" class="finishBook">Read? </button>`;
+    }
+    newBookCardDiv.innerHTML += `<button dataId="${book.id}" class="deleteBook">Delete?</button>`;
     currentLibraryDiv.appendChild(newBookCardDiv);
   }
 
@@ -106,6 +111,19 @@ function renderCurrentBooks() {
     deleteBookBtn.addEventListener("click", () => {
       const bookToDeleteId = deleteBookBtn.getAttribute("dataId");
       myLibrary = myLibrary.filter((book) => book.id !== bookToDeleteId);
+      renderCurrentBooks();
+    });
+  });
+
+  const finishBookBtns = document.querySelectorAll(".finishBook");
+  finishBookBtns.forEach((finishBookBtn) => {
+    finishBookBtn.addEventListener("click", () => {
+      const bookId = finishBookBtn.getAttribute("dataId");
+      for (book of myLibrary) {
+        if (book.id === bookId) {
+          book.readBook();
+        }
+      }
       renderCurrentBooks();
     });
   });
