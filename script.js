@@ -1,32 +1,36 @@
 let myLibrary = [];
 
-function Book(title, author, numPages, alreadyRead = false) {
+function Book(title, author, numPages, alreadyRead = false, id) {
   // Book constructor
   this.title = title;
   this.author = author;
   this.numPages = numPages;
   this.alreadyRead = alreadyRead;
+  this.id = id;
 }
 
 const frankenstein = new Book(
   (title = "Frankenstein"),
   (author = "Mary Shelley"),
   (numPages = 280),
-  (alreadyRead = true)
+  (alreadyRead = true),
+  (id = crypto.randomUUID())
 );
 addBookToLibrary(frankenstein);
 const leanStartup = new Book(
   (title = "The Lean Startup"),
   (author = "Eric Ries"),
   (numPages = 336),
-  (alreadyRead = true)
+  (alreadyRead = true),
+  (id = crypto.randomUUID())
 );
 addBookToLibrary(leanStartup);
 const inferno = new Book(
   (title = "Inferno"),
   (author = "Dante Alighieri"),
   (numPages = 136),
-  (alreadyRead = false)
+  (alreadyRead = false),
+  (id = crypto.randomUUID())
 );
 addBookToLibrary(inferno);
 
@@ -37,7 +41,7 @@ function addBookToLibrary(book) {
 const addFormBtn = document.getElementById("addFormBtn");
 const formWrapper = document.getElementById("formWrapper");
 addFormBtn.addEventListener("click", () => {
-  if (formWrapper.className.length!==0) {
+  if (formWrapper.className.length !== 0) {
     formWrapper.className = "";
   } else {
     formWrapper.className = "hideForm";
@@ -61,9 +65,11 @@ addBookBtn.addEventListener("click", (event) => {
     return;
   }
   const newBook = new Book(
-    bookNameInput.value,
-    bookAuthorInput.value,
-    bookPagesInput.value
+    (title = bookNameInput.value),
+    (author = bookAuthorInput.value),
+    (numPages = bookPagesInput.value),
+    (alreadyRead = false),
+    (id = crypto.randomUUID())
   );
   myLibrary.push(newBook);
   renderCurrentBooks();
@@ -71,13 +77,19 @@ addBookBtn.addEventListener("click", (event) => {
   bookAuthorInput.value = "";
   bookPagesInput.value = "";
   bookNameInput.focus();
-  formWrapper.className="hideForm"
+  formWrapper.className = "hideForm";
 });
 
 function renderCurrentBooks() {
   currentLibraryDiv.innerHTML = null;
+
+  if (myLibrary.length === 0) {
+    currentLibraryDiv.textContent = "You have no books! ";
+  }
+
   for (let book of myLibrary) {
     const newBookCardDiv = document.createElement("div");
+    newBookCardDiv.setAttribute("dataId", book.id);
     newBookCardDiv.className = "newBookCard";
     newBookCardDiv.innerHTML = `<p>Title: ${book.title}</p>`;
     newBookCardDiv.innerHTML += `<p>Author: ${book.author}</p>`;
@@ -85,8 +97,18 @@ function renderCurrentBooks() {
     newBookCardDiv.innerHTML += `<p> ${
       book.alreadyRead ? "Completed!" : "Not Read!"
     }</p>`;
+    newBookCardDiv.innerHTML += `<button dataId="${book.id}" class="deleteBook">Delete</button>`;
     currentLibraryDiv.appendChild(newBookCardDiv);
   }
+
+  const deleteBookBtns = document.querySelectorAll(".deleteBook");
+  deleteBookBtns.forEach((deleteBookBtn) => {
+    deleteBookBtn.addEventListener("click", () => {
+      const bookToDeleteId = deleteBookBtn.getAttribute("dataId");
+      myLibrary = myLibrary.filter((book) => book.id !== bookToDeleteId);
+      renderCurrentBooks();
+    });
+  });
 }
 
 renderCurrentBooks();

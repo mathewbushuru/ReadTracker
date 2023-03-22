@@ -52,9 +52,11 @@ button {
   font-size: 15px;
 }
 .newBookCard:hover{
-    background-color: #000;
+    border: 2px solid #000;
+}
+.newBookCard > button:hover {
     color: #f0f0f0;
-    cursor: pointer;
+    background-color: #000;
 }
 #addFormBtn{
     background-color: #000;
