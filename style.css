@@ -17,7 +17,13 @@ input {
   padding: 8px 18px;
   font: inherit;
   outline-color: #666;
+  border: 1px solid;
   border-radius: 12px;
+}
+label,input{
+    display: block;
+    width: 90%;
+    margin: 5px auto;
 }
 button {
   align-self: center;
@@ -40,6 +46,8 @@ button {
 .newBookCard {
   border: 1px solid #666;
   border-radius: 12px;
-  padding: 54px 0;
+  padding: 14px 36px;
   text-transform: capitalize;
+  text-align: left;
+  font-size: 15px;
 }
