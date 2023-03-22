@@ -34,6 +34,16 @@ function addBookToLibrary(book) {
   myLibrary.push(book);
 }
 
+const addFormBtn = document.getElementById("addFormBtn");
+const formWrapper = document.getElementById("formWrapper");
+addFormBtn.addEventListener("click", () => {
+  if (formWrapper.className.length!==0) {
+    formWrapper.className = "";
+  } else {
+    formWrapper.className = "hideForm";
+  }
+});
+
 const currentLibraryDiv = document.getElementById("currentLibrary");
 
 const addBookBtn = document.getElementById("addBookBtn");
@@ -61,6 +71,7 @@ addBookBtn.addEventListener("click", (event) => {
   bookAuthorInput.value = "";
   bookPagesInput.value = "";
   bookNameInput.focus();
+  formWrapper.className="hideForm"
 });
 
 function renderCurrentBooks() {
@@ -70,7 +81,7 @@ function renderCurrentBooks() {
     newBookCardDiv.className = "newBookCard";
     newBookCardDiv.innerHTML = `<p>Title: ${book.title}</p>`;
     newBookCardDiv.innerHTML += `<p>Author: ${book.author}</p>`;
-    newBookCardDiv.innerHTML += `<p>Number of Pages: ${book.numPages}</p>`;
+    newBookCardDiv.innerHTML += `<p>Pages: ${book.numPages}</p>`;
     newBookCardDiv.innerHTML += `<p> ${
       book.alreadyRead ? "Completed!" : "Not Read!"
     }</p>`;

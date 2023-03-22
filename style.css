@@ -3,7 +3,7 @@ body {
     Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   font-size: 18px;
   margin: 0;
-  padding: 0;
+  padding: 18px 0;
   text-align: center;
 }
 form {
@@ -50,4 +50,16 @@ button {
   text-transform: capitalize;
   text-align: left;
   font-size: 15px;
+}
+.newBookCard:hover{
+    background-color: #000;
+    color: #f0f0f0;
+    cursor: pointer;
+}
+#addFormBtn{
+    background-color: #000;
+    font-size: 16px;
+}
+.hideForm{
+    display: none;
 }

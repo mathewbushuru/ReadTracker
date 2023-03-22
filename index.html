@@ -8,22 +8,24 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <form>
-      <h3>Add New Book</h3>
-      <div>
-        <label for="bookName">Title </label>
-        <input type="text" id="bookName" autofocus required />
-      </div>
-      <div>
-        <label for="bookAuthor">Author </label>
-        <input type="text" id="bookAuthor" required />
-      </div>
-      <div>
-        <label for="bookPages">Number of pages </label>
-        <input type="number" id="bookPages" required />
-      </div>
-      <button id="addBookBtn" type="submit">Add Book to Library</button>
-    </form>
+    <button id="addFormBtn">Add new book</button>
+    <div id="formWrapper" class="hideForm">
+      <form>
+        <div>
+          <label for="bookName">Title </label>
+          <input type="text" id="bookName" autofocus required />
+        </div>
+        <div>
+          <label for="bookAuthor">Author </label>
+          <input type="text" id="bookAuthor" required />
+        </div>
+        <div>
+          <label for="bookPages">Number of pages </label>
+          <input type="number" id="bookPages" required />
+        </div>
+        <button id="addBookBtn" type="submit">Add Book to Library</button>
+      </form>
+    </div>
 
     <h3>Current Library</h3>
     <div id="currentLibrary"></div>
