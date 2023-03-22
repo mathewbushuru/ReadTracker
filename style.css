@@ -7,7 +7,7 @@ body {
   text-align: center;
 }
 form {
-  width: 600px;
+  width: min(600px, 90vw);
   margin: 40px auto;
   display: flex;
   flex-direction: column;
@@ -15,23 +15,30 @@ form {
 }
 input {
   padding: 8px 18px;
+  font: inherit;
+  outline-color: #666;
+  border-radius: 12px;
 }
 button {
   align-self: center;
-  padding: 6px 12px;
+  padding: 12px 18px;
   cursor: pointer;
   font: inherit;
   font-size: 14px;
+  border: none;
+  border-radius: 12px;
+  background-color: #999;
+  color: #f0f0f0;
 }
 #currentLibrary {
-  padding: 18px;
+  padding: 18px 36px;
   display: grid;
-  grid-template-columns: repeat(4, minmax(200px, 25%));
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   row-gap: 36px;
   column-gap: 18px;
 }
 .newBookCard {
   border: 1px solid #666;
   border-radius: 12px;
-  padding: 60px 0;
+  padding: 48px 0;
 }

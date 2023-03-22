@@ -24,3 +24,10 @@ for (let book of myLibrary) {
   newBookCardDiv.textContent = book.name;
   currentLibraryDiv.appendChild(newBookCardDiv);
 }
+
+const addBookBtn = document.getElementById("addBookBtn");
+const bookNameInput = document.getElementById("bookName");
+
+addBookBtn.addEventListener("click", (event) => {
+  event.preventDefault();
+});
